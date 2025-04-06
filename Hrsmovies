@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HRSmovies</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #fff;
+      text-align: center;
+    }
+    header {
+      padding: 20px;
+      background-color: #1f1f1f;
+      font-size: 2em;
+      font-weight: bold;
+    }
+    main {
+      padding: 20px;
+    }
+    input[type="file"] {
+      margin: 20px 0;
+    }
+    .video-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .video-item {
+      background: #222;
+      padding: 10px;
+      border-radius: 10px;
+      max-width: 320px;
+    }
+    video {
+      width: 100%;
+      border-radius: 10px;
+    }
+    a.download-btn {
+      display: inline-block;
+      margin-top: 10px;
+      color: #fff;
+      text-decoration: none;
+      padding: 8px 16px;
+      background-color: #e50914;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <header>HRSmovies</header>
+  <main>
+    <h2>Upload Your Video</h2>
+    <input type="file" id="videoUpload" accept="video/*" /><h2>Watch & Download Videos</h2>
+<div class="video-container" id="videoList"></div>
+
+  </main>  <script>
+    const videoUpload = document.getElementById('videoUpload');
+    const videoList = document.getElementById('videoList');
+
+    videoUpload.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        const url = URL.createObjectURL(file);
+
+        const container = document.createElement('div');
+        container.className = 'video-item';
+
+        const video = document.createElement('video');
+        video.src = url;
+        video.controls = true;
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url;
+        downloadLink.download = file.name;
+        downloadLink.className = 'download-btn';
+        downloadLink.innerText = 'Download';
+
+        container.appendChild(video);
+        container.appendChild(downloadLink);
+        videoList.appendChild(container);
+      }
+    });
+  </script></body>
+</html>
